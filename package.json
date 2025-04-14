@@ -1,0 +1,19 @@
+{
+  "name": "basededatos-pia",
+  "version": "1.0.0",
+  "description": "Proyecto de bdd",
+  "main": "index.js",
+  "dependencies": {
+    "express": "^5.1.0",
+    "ejs": "^3.1.10"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": ""
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/DiegoEdu19/BaseDeDatos-PIA.git"
+  },
+  "private": true
+}
