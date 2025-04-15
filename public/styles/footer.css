@@ -1,0 +1,27 @@
+.site-footer {
+    background-color: #f8f8f8;
+    padding: 20px 0;
+    font-family: Arial, sans-serif;
+    color: #333;
+    border-top: 1px solid #e7e7e7;
+}
+
+.footer-content {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 20px;
+}
+
+.copyright {
+    line-height: 1.5;
+}
+
+.social-media p {
+    margin-bottom: 10px;
+    text-align: right;
+}
+
+
