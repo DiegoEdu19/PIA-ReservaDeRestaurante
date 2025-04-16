@@ -11,6 +11,8 @@ app.get('/', (req, res) => {
     res.render('Usuario/index');
 });
 
+
+
 app.listen(port, () => {
     console.log(`Servidor corriendo en el puerto http://localhost:${port}/`);
 });

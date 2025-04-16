@@ -5,13 +5,41 @@
     <title>Inicio</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.5/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-SgOJa3DmI69IUzQ2PVdRZhwQ+dy64/BUtbMJw1MZ8t5HZApcHrRKUc4W0kG879m7" crossorigin="anonymous">
     <link rel="stylesheet" href="/styles/footer.css">
+    <link rel="stylesheet" href="/styles/index.css">
+
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.6.0/css/fontawesome.min.css">
 </head>
-
+<body>
 
 <%- include('../partials/navbar') %>
+
+<div class="contenedor-principal">
+    <div>
+        <img id="big-fish" src="/assets/signo.png" alt="big fish signo" class="object-fit-fill img-fluid" data-bs-ride="carousel">
+    </div>
+    <div id="carousel-inicial" class="carousel carousel-fade object-fit-container" data-bs-ride="carousel">
+        <div class="carousel-inner">
+            <div class="carousel-item active">
+                <img src="/assets/pescao.png" class="d-block" alt="pescado o algo así ">
+            </div>
+            <div class="carousel-item active">
+                <img src="/assets/tacos.png" class="d-block" alt="tacos">
+            </div>
+        </div>
+        <button class="carousel-control-prev" type="button" data-bs-target="#carousel-inicial" data-bs-slide="prev">
+            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Previous</span>
+        </button>
+        <button class="carousel-control-next" type="button" data-bs-target="#carousel-inicial" data-bs-slide="next">
+            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Next</span>
+        </button>
+    </div>
+</div>
 
 <%- include('../partials/footer') %>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.5/dist/js/bootstrap.bundle.min.js" integrity="sha384-k6d4wzSIapyDyv1kpU366/PK5hCdSbCRGRCMv+eplOQJWyd1fbcAu9OCUj5zNLiq" crossorigin="anonymous"></script>
 <script src="https://kit.fontawesome.com/00eb6607b9.js" crossorigin="anonymous"></script>
+
+</body>
 </html>
