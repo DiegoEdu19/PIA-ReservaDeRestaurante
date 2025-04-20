@@ -4,4 +4,16 @@
     align-items: center;
 }
 
+#carousel-inicial{
+    margin:auto;
+}
 
+.img-carrusel{
+    margin:auto;
+    width:50%;
+    height:60%;
+}
+
+.carrusel-flechas{
+    background-color:black;
+}

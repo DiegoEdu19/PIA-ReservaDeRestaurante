@@ -13,27 +13,32 @@
 
 <%- include('../partials/navbar') %>
 
-<div class="contenedor-principal">
+<div class="contenedor-principal position-relative overflow-hidden">
+
     <div>
-        <img id="big-fish" src="/assets/signo.png" alt="big fish signo" class="object-fit-fill img-fluid" data-bs-ride="carousel">
+        <img id="big-fish" src="/assets/signo.png" alt="big fish signo" class="object-fit-fill img-fluid">
     </div>
-    <div id="carousel-inicial" class="carousel carousel-fade object-fit-container" data-bs-ride="carousel">
+    <div id="carousel-inicial" class="carousel carousel-fade object-fit-container carousel-dark" data-bs-ride="carousel">
         <div class="carousel-inner">
             <div class="carousel-item active">
-                <img src="/assets/pescao.png" class="d-block" alt="pescado o algo así ">
+                <img src="/assets/pescao.png" class="d-block img-carrusel" alt="pescado o algo así">
             </div>
-            <div class="carousel-item active">
-                <img src="/assets/tacos.png" class="d-block" alt="tacos">
+            <div class="carousel-item">
+                <img src="/assets/tacos.png" class="d-block img-carrusel" alt="tacos">
             </div>
         </div>
+        <div class="carrusel-flechas">
         <button class="carousel-control-prev" type="button" data-bs-target="#carousel-inicial" data-bs-slide="prev">
             <span class="carousel-control-prev-icon" aria-hidden="true"></span>
             <span class="visually-hidden">Previous</span>
         </button>
+        </div>
+        <div class="carrusel-flechas">
         <button class="carousel-control-next" type="button" data-bs-target="#carousel-inicial" data-bs-slide="next">
             <span class="carousel-control-next-icon" aria-hidden="true"></span>
             <span class="visually-hidden">Next</span>
         </button>
+        </div>
     </div>
 </div>
 
