@@ -11,6 +11,9 @@ app.get('/', (req, res) => {
     res.render('Usuario/index');
 });
 
+app.get('/historia', (req, res) => {
+    res.render('Usuario/historia');
+});
 
 
 app.listen(port, () => {
