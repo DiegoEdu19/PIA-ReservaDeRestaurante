@@ -15,6 +15,13 @@ app.get('/historia', (req, res) => {
     res.render('Usuario/historia');
 });
 
+app.get('/ubicacion', (req, res) => {
+    res.render('Usuario/ubicacion');
+});
+
+app.get('/index', (req, res) => {
+    res.render('Usuario/index');
+})
 
 app.listen(port, () => {
     console.log(`Servidor corriendo en el puerto http://localhost:${port}/`);
