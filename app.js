@@ -4,6 +4,7 @@ const app = express();
 const port = 3000;
 
 app.use(express.static(path.join(__dirname, 'public')));
+app.use('/assets', express.static(path.join(__dirname, 'public')));
 app.set('views', path.join(__dirname, 'Views'));
 app.set('view engine', 'ejs');
 
@@ -19,9 +20,11 @@ app.get('/ubicacion', (req, res) => {
     res.render('Usuario/ubicacion');
 });
 
-app.get('/index', (req, res) => {
-    res.render('Usuario/index');
-})
+app.get('/menu', (req, res) => {
+    res.render('Usuario/menu');
+});
+
+
 
 app.listen(port, () => {
     console.log(`Servidor corriendo en el puerto http://localhost:${port}/`);
