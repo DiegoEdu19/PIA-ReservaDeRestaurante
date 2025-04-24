@@ -3,6 +3,8 @@
   "version": "1.0.0",
   "description": "Proyecto de bdd",
   "main": "index.js",
+
+
   "dependencies": {
     "bootstrap": "^5.3.5",
     "ejs": "^3.1.10",
