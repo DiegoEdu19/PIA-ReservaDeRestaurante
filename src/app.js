@@ -7,6 +7,7 @@ const ubicacionRouter = require('./routers/ubicacion.routes');
 const menuRouter = require('./routers/menu.routes');
 const usersRouter = require('./routers/users.routes');
 const user_opRouter = require('./routers/users_op.routes');
+const reportesRouter =require('./routers/reportes.routes');
 
 // Servir archivos estáticos desde public/
 app.use(express.static(path.join(__dirname, '../public')));
@@ -21,6 +22,7 @@ app.use(usersRouter);
 app.use(user_opRouter);
 app.use(ubicacionRouter);
 app.use(menuRouter);
+app.use(reportesRouter);
 
 app.listen(port, () => {
     console.log(`Servidor corriendo en el puerto http://localhost:${port}/`);
