@@ -11,7 +11,7 @@ router.get('/historia', (req, res) => {
 });
 
 router.get('/login', (req, res) => {
-    res.render('Admin/login');
+    res.render('users/login');
 });
 
 

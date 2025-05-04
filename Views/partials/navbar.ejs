@@ -1,5 +1,5 @@
 <nav class="navbar navbar-expand-lg" style="background-color: #393d40">
-    <div class="container-fluid" >
+    <div class="container-fluid">
         <a class="navbar-brand" href="#">
             <img src="/assets/logo.png" alt="pez" width="60" height="48">
         </a>
@@ -7,21 +7,33 @@
         <div class="container text-center text-white">
             <div class="row">
                 <div class="col">
-                    <a href="/">Inicio</a>
+                    <a href="/" class="navbar-link">Inicio</a>
                 </div>
                 <div class="col">
-                    <a href="/menu">Menu</a>
+                    <a href="/menu" class="navbar-link">Menu</a>
                 </div>
                 <div class="col">
-                    <a href="/ubicacion">Ubicación, horarios y contacto</a>
+                    <a href="/ubicacion" class="navbar-link">Ubicación, horarios y contacto</a>
                 </div>
                 <div class="col">
-                    <a href="/historia">Nuestra historia</a>
+                    <a href="/historia" class="navbar-link">Nuestra historia</a>
                 </div>
                 <div class="col">
-                    Reservar
+                    <span>Reservar</span>
                 </div>
             </div>
         </div>
     </div>
 </nav>
+
+<style>
+    .navbar-link {
+        color: white !important;
+        text-decoration: none;
+    }
+    
+    .navbar-link:hover {
+        color: #f8f9fa !important; 
+        text-decoration: underline; 
+    }
+</style>
