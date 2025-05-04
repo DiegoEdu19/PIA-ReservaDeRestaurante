@@ -13,4 +13,9 @@ router.patch('/menu', (req, res) => {
 
 });
 
+router.get('/menuAdmin', (req, res) => {
+    res.render('Admin/menuAdmin');
+    console.log("obteniendo menú");
+});
+
 module.exports = router;
