@@ -6,7 +6,7 @@ const port = 3000;
 const ubicacionRouter = require('./routers/ubicacion.routes');
 const menuRouter = require('./routers/menu.routes');
 const usersRouter = require('./routers/users.routes');
-const user_opRouter = require('./routers/users_op.routes');
+const user_opRouter = require('./routers/gestionUsuarios.routes');
 const reportesRouter =require('./routers/gestionReservas.routes');
 
 // Servir archivos estáticos desde public/
