@@ -14,7 +14,123 @@
             <%- include('./../partials/navbarAdmin.ejs') %>
 
             <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4 py-4">
-                
+                <h2>Editar horarios de atención</h2>
+        <table class="table table-bordered">
+            <thead>
+                <tr>
+                    <th>Día</th>
+                    <th>Abierto</th>
+                    <th>Hora de Apertura</th>
+                    <th>Hora de Cierre</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>Lunes</td>
+                    <td class="text-center">
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" id="lunesAbierto" checked>
+                            <label class="form-check-label sr-only" for="lunesAbierto">Abierto Lunes</label>
+                        </div>
+                    </td>
+                    <td>
+                        <input type="time" class="form-control form-control-sm" value="13:00">
+                    </td>
+                    <td>
+                        <input type="time" class="form-control form-control-sm" value="20:00">
+                    </td>
+                </tr>
+                <tr>
+                    <td>Martes</td>
+                    <td class="text-center">
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" id="martesAbierto" checked>
+                            <label class="form-check-label sr-only" for="martesAbierto">Abierto Martes</label>
+                        </div>
+                    </td>
+                    <td>
+                        <input type="time" class="form-control form-control-sm" value="13:00">
+                    </td>
+                    <td>
+                        <input type="time" class="form-control form-control-sm" value="20:00">
+                    </td>
+                </tr>
+                <tr>
+                    <td>Miércoles</td>
+                    <td class="text-center">
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" id="miercolesAbierto" checked>
+                            <label class="form-check-label sr-only" for="miercolesAbierto">Abierto Miércoles</label>
+                        </div>
+                    </td>
+                    <td>
+                        <input type="time" class="form-control form-control-sm" value="13:00">
+                    </td>
+                    <td>
+                        <input type="time" class="form-control form-control-sm" value="20:00">
+                    </td>
+                </tr>
+                <tr>
+                    <td>Jueves</td>
+                    <td class="text-center">
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" id="juevesAbierto" checked>
+                            <label class="form-check-label sr-only" for="juevesAbierto">Abierto Jueves</label>
+                        </div>
+                    </td>
+                    <td>
+                        <input type="time" class="form-control form-control-sm" value="13:00">
+                    </td>
+                    <td>
+                        <input type="time" class="form-control form-control-sm" value="20:00">
+                    </td>
+                </tr>
+                <tr>
+                    <td>Viernes</td>
+                    <td class="text-center">
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" id="viernesAbierto" checked>
+                            <label class="form-check-label sr-only" for="viernesAbierto">Abierto Viernes</label>
+                        </div>
+                    </td>
+                    <td>
+                        <input type="time" class="form-control form-control-sm" value="13:00">
+                    </td>
+                    <td>
+                        <input type="time" class="form-control form-control-sm" value="22:00">
+                    </td>
+                </tr>
+                <tr>
+                    <td>Sábado</td>
+                    <td class="text-center">
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" id="sabadoAbierto" checked>
+                            <label class="form-check-label sr-only" for="sabadoAbierto">Abierto Sábado</label>
+                        </div>
+                    </td>
+                    <td>
+                        <input type="time" class="form-control form-control-sm" value="13:00">
+                    </td>
+                    <td>
+                        <input type="time" class="form-control form-control-sm" value="22:00">
+                    </td>
+                </tr>
+                <tr>
+                    <td>Domingo</td>
+                    <td class="text-center">
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" id="domingoAbierto">
+                            <label class="form-check-label sr-only" for="domingoAbierto">Abierto Domingo</label>
+                        </div>
+                    </td>
+                    <td></td>
+                    <td></td>
+                </tr>
+            </tbody>
+        </table>
+
+        <button type="button" class="btn btn-primary">Actualizar</button>
+        <button type="button" class="btn btn-danger">Cancelar</button>
 
                 <div class="mt-4 text-muted">
                     © 2025 / Todos los derechos reservados / Big Fish
