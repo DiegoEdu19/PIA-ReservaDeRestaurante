@@ -2,8 +2,8 @@ const express = require('express');
 
 const router = express.Router();
 
-router.get('/reportes', (req, res) => {
-    res.render('Admin/reportes');
+router.get('/gestionReservas', (req, res) => {
+    res.render('Admin/gestionReservas');
 });
 
 

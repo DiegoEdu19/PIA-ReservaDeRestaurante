@@ -7,7 +7,7 @@ const ubicacionRouter = require('./routers/ubicacion.routes');
 const menuRouter = require('./routers/menu.routes');
 const usersRouter = require('./routers/users.routes');
 const user_opRouter = require('./routers/users_op.routes');
-const reportesRouter =require('./routers/reportes.routes');
+const reportesRouter =require('./routers/gestionReservas.routes');
 
 // Servir archivos estáticos desde public/
 app.use(express.static(path.join(__dirname, '../public')));
