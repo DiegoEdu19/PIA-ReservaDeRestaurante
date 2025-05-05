@@ -14,7 +14,67 @@
             <%- include('./../partials/navbarAdmin.ejs') %>
 
             <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4 py-4">
-                
+                <div class="card">
+                    <div class="card-header bg-light">
+                        <h4>Empleados</h4>
+                    </div>
+                    <div class="card-body">
+                        <table class="table table-bordered">
+                            <thead class="table-light">
+                                <tr>
+                                    <th>ID</th>
+                                    <th>Nombre</th>
+                                    <th>Usuario de Empleado</th>
+                                    <th>Contraseña</th>
+                                    <th>Rol</th>
+                                    <th>Acciones</th>
+                                </tr>
+                            </thead>
+                            <tbody id="empleados-tbody">
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+        
+                <!-- Sección para agregar un nuevo empleado -->
+                <div class="card mt-4">
+                    <div class="card-header bg-light">
+                        <h4>Agregar Empleado</h4>
+                    </div>
+                    <div class="card-body">
+                        <form>
+                            <div class="row">
+                                
+                                <div class="col-md-2">
+                                    <input type="text" class="form-control" placeholder="Nombre">
+                                </div>
+                                <div class="col-md-2">
+                                    <input type="text" class="form-control" placeholder="Apellido">
+                                </div>
+                                <div class="col-md-2">
+                                    <input type="text" class="form-control" placeholder="Usuario de Empleado">
+                                </div>
+                                
+                                <div class="col-md-2">
+                                    <input type="password" class="form-control" placeholder="Contraseña">
+                                </div>
+        
+                                <div class="col-md-2">
+                                    <select class="form-select">
+                                        <option value="" disabled selected>Selecciona un rol</option>
+                                        <option value="1">Administrador</option>
+                                        <option value="2">Empleado</option>
+                                    </select>
+                                </div>
+                                
+                                <div class="col-md-2">
+                                    <button type="submit" class="btn btn-success">Crear</button>
+                                    <button type="reset" class="btn btn-danger">Cancelar</button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
 
                 <div class="mt-4 text-muted">
                     © 2025 / Todos los derechos reservados / Big Fish
