@@ -13,7 +13,7 @@ router.get('/usuarios', (req, res) => {
 });
 
 router.get('/api/usuarios', getEmpleados);
-router.post('/usuarios', agregarEmpleado);
+router.post('/agregarUsuarios', agregarEmpleado);
 router.put('/usuarios/:id', editarEmpleado);
 router.delete('/usuarios/:id', eliminarEmpleado);
 

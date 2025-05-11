@@ -24,13 +24,15 @@
                                 <tr>
                                     <th>ID</th>
                                     <th>Nombre</th>
-                                    <th>Usuario de Empleado</th>
-                                    <th>Contraseña</th>
+                                    <th>Correo</th>
+                                    <th>Teléfono</th>
                                     <th>Rol</th>
+                                    <th>Restaurante</th>
                                     <th>Acciones</th>
                                 </tr>
                             </thead>
                             <tbody id="empleados-tbody">
+                                <!-- Aquí se cargarán los empleados desde el frontend -->
                             </tbody>
                         </table>
                     </div>
@@ -44,7 +46,6 @@
                     <div class="card-body">
                         <form>
                             <div class="row">
-                                
                                 <div class="col-md-2">
                                     <input type="text" class="form-control" placeholder="Nombre">
                                 </div>
@@ -54,19 +55,19 @@
                                 <div class="col-md-2">
                                     <input type="text" class="form-control" placeholder="Usuario de Empleado">
                                 </div>
-                                
                                 <div class="col-md-2">
                                     <input type="password" class="form-control" placeholder="Contraseña">
                                 </div>
-        
                                 <div class="col-md-2">
-                                    <select class="form-select">
+                                    <select class="form-select" id="selectRol">
                                         <option value="" disabled selected>Selecciona un rol</option>
                                         <option value="1">Administrador</option>
                                         <option value="2">Empleado</option>
                                     </select>
                                 </div>
-                                
+                                <div class="col-md-2">
+                                    <input type="text" class="form-control" placeholder="Restaurante" id="selectRestaurante">
+                                </div>
                                 <div class="col-md-2">
                                     <button type="submit" class="btn btn-success">Crear</button>
                                     <button type="reset" class="btn btn-danger">Cancelar</button>

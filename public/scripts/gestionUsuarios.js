@@ -9,8 +9,8 @@ $(document).ready(async function () {
     const correo = $('input[placeholder="Correo"]').val().trim();
     const telefono = $('input[placeholder="Teléfono"]').val().trim();
     const contrasena = $('input[placeholder="Contraseña"]').val().trim();
-    const rol = $("#selectRol").val();  // Asegúrate que el select tenga este ID
-    const restaurante = $("#selectRestaurante").val();  // Asegúrate que este select exista
+    const rol = $("#selectRol").val(); 
+    const restaurante = $("#selectRestaurante").val(); 
 
     if (!nombre || !apellidos || !correo || !telefono || !contrasena || !rol || !restaurante) {
       $('#alertBox').append(createAlert('info', 'Por favor, completa todos los campos.'));
@@ -36,7 +36,7 @@ $(document).ready(async function () {
           body: JSON.stringify(datosEmpleado),
         });
       } else {
-        response = await fetch("/usuarios", {
+        response = await fetch("/agregarUsuarios", {
           method: "POST",
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify(datosEmpleado),
@@ -64,36 +64,32 @@ $(document).ready(async function () {
 
 async function cargarEmpleados() {
   try {
-    const res = await fetch('/empleados');
+    const res = await fetch('/api/usuarios');
     const empleados = await res.json();
 
-    const empleadosContainer = document.getElementById('empleadosContainer');
-    empleadosContainer.innerHTML = ''; // Limpiar antes de agregar
+    const $tbody = $("#empleados-tbody");
+    $tbody.empty();
 
     empleados.forEach(empleado => {
-      const card = document.createElement('div');
-      card.className = 'col-md-4';
-
-      card.innerHTML = `
-        <div class="card shadow mt-3">
-          <div class="card-body">
-            <h5 class="card-title">${empleado.nombre_empleado} ${empleado.apellido_empleado}</h5>
-            <p class="card-text"><strong>Correo:</strong> ${empleado.correo_empleado}</p>
-            <p class="card-text"><strong>Teléfono:</strong> ${empleado.telefono_empleado}</p>
-            <p class="card-text"><strong>Rol:</strong> ${empleado.nombre_rol || empleado.id_rol}</p>
-            <p class="card-text"><strong>Restaurante:</strong> ${empleado.id_restaurante}</p>
-            <button class="btn btn-warning btn-sm mt-2" onclick="editarEmpleado(${empleado.id_empleado}, '${empleado.nombre_empleado}', '${empleado.apellido_empleado}', '${empleado.correo_empleado}', '${empleado.telefono_empleado}', '${empleado.contrasena_empleado}', '${empleado.id_rol}', '${empleado.id_restaurante}')">Editar</button>
-            <button class="btn btn-danger btn-sm mt-2" onclick="eliminarEmpleado(${empleado.id_empleado})">Eliminar</button>
-          </div>
-        </div>
-      `;
-
-      empleadosContainer.appendChild(card);
+      const $tr = $("<tr>");
+      $tr.append(`
+        <td>${empleado.id_empleado}</td>
+        <td>${empleado.nombre_empleado} ${empleado.apellido_empleado}</td>
+        <td>${empleado.correo_empleado}</td>
+        <td>${empleado.telefono_empleado}</td>
+        <td>${empleado.nombre_rol || empleado.id_rol}</td>
+        <td>${empleado.nombre_restaurante || empleado.id_restaurante}</td>
+        <td>
+          <button class="btn btn-warning btn-sm mt-2" onclick="editarEmpleado(${empleado.id_empleado}, '${empleado.nombre_empleado}', '${empleado.apellido_empleado}', '${empleado.correo_empleado}', '${empleado.telefono_empleado}', '${empleado.contrasena_empleado}', '${empleado.id_rol}', '${empleado.id_restaurante}')">Editar</button>
+          <button class="btn btn-danger btn-sm mt-2" onclick="eliminarEmpleado(${empleado.id_empleado})">Eliminar</button>
+        </td>
+      `);
+      $tbody.append($tr);
     });
 
   } catch (error) {
     console.error('Error al cargar los empleados:', error);
-    empleadosContainer.innerHTML = '<div class="alert alert-danger">No se pudieron cargar los empleados.</div>';
+    $('#empleados-tbody').html('<tr><td colspan="7" class="text-center">No se pudieron cargar los empleados.</td></tr>');
   }
 }
 
