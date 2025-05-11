@@ -1,4 +1,4 @@
-const express = require('express');
+import express from 'express';
 
 const router = express.Router();
 
@@ -18,4 +18,4 @@ router.get('/menuAdmin', (req, res) => {
     console.log("obteniendo menú");
 });
 
-module.exports = router;
+export default router;

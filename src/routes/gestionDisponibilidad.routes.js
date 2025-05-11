@@ -1,4 +1,4 @@
-const express = require('express');
+import express from 'express';
 
 const router = express.Router();
 
@@ -6,4 +6,4 @@ router.get('/disponibilidad', (req, res) => {
     res.render('Admin/gestionDisponibilidad');
 });
 
-module.exports = router;
+export default router;

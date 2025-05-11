@@ -1,12 +1,20 @@
-const express = require('express');
-const { getUsuarios } = require('../controllers/gestionUsuarios.controllers');
+import express from 'express';
+import {
+  getEmpleados,
+  agregarEmpleado,
+  editarEmpleado,
+  eliminarEmpleado
+} from '../controllers/gestionUsuarios.controllers.js';
 
 const router = express.Router();
 
 router.get('/usuarios', (req, res) => {
-    res.render('Admin/gestionUsuarios');
+  res.render('Admin/gestionUsuarios');
 });
 
-router.get('/api/usuarios', getUsuarios);
+router.get('/api/usuarios', getEmpleados);
+router.post('/usuarios', agregarEmpleado);
+router.put('/usuarios/:id', editarEmpleado);
+router.delete('/usuarios/:id', eliminarEmpleado);
 
-module.exports = router;
+export default router;

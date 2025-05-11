@@ -1,4 +1,4 @@
-const express = require('express');
+import express from 'express';
 
 const router = express.Router();
 
@@ -6,4 +6,4 @@ router.get('/horarios', (req, res) => {
     res.render('Admin/gestionHorarios');
 });
 
-module.exports = router;
+export default router;

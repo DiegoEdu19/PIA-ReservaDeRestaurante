@@ -2,6 +2,7 @@
   "name": "basededatos-pia",
   "version": "1.0.0",
   "description": "Proyecto de bdd",
+  "type": "module",
   "main": "app.js",
   "dependencies": {
     "bootstrap": "^5.3.5",
