@@ -7,15 +7,4 @@ router.get('/menu', (req, res) => {
     console.log("obteniendo menú");
 });
 
-router.patch('/menu', (req, res) => {
-
-    console.log("Menú editado");
-
-});
-
-router.get('/menuAdmin', (req, res) => {
-    res.render('Admin/menuAdmin');
-    console.log("obteniendo menú");
-});
-
 export default router;

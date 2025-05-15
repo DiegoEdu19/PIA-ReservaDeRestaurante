@@ -9,6 +9,7 @@ import user_opRouter from './routes/gestionUsuarios.routes.js';
 import reportesRouter from './routes/gestionReservas.routes.js';
 import gestionHorarios from './routes/gestionHorarios.routes.js';
 import gestionDisponibilidad from './routes/gestionDisponibilidad.routes.js';
+import gestionMenuRouter from './routes/gestionMenu.routes.js';
 
 // Necesario para __dirname en ESM
 const __filename = fileURLToPath(import.meta.url);
@@ -19,8 +20,7 @@ const port = 3000;
 
 // Servir archivos estáticos desde public/
 app.use(express.static(path.join(__dirname, '../public')));
-app.use('/assets', express.static(path.join(__dirname, '../public')));
-
+app.use('/assets', express.static(path.join(__dirname, '../public/assets')));
 // Vistas EJS
 app.set('views', path.join(__dirname, '../views'));
 app.set('view engine', 'ejs');
@@ -33,6 +33,7 @@ app.use(menuRouter);
 app.use(reportesRouter);
 app.use(gestionHorarios);
 app.use(gestionDisponibilidad);
+app.use(gestionMenuRouter);
 
 app.listen(port, () => {
   console.log(`Servidor corriendo en http://localhost:${port}/`);
