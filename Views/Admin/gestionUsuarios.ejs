@@ -44,32 +44,33 @@
                         <h4>Agregar Empleado</h4>
                     </div>
                     <div class="card-body">
-                        <form>
+                        <form id="form-agregar-empleado">
                             <div class="row">
                                 <div class="col-md-2">
-                                    <input type="text" class="form-control" placeholder="Nombre">
+                                    <input type="text" class="form-control" id="nombre" name="nombre" placeholder="Nombre">
                                 </div>
                                 <div class="col-md-2">
-                                    <input type="text" class="form-control" placeholder="Apellido">
+                                    <input type="text" class="form-control" id="apellidos" name="apellidos" placeholder="Apellido">
                                 </div>
                                 <div class="col-md-2">
-                                    <input type="text" class="form-control" placeholder="Usuario de Empleado">
+                                    <input type="text" class="form-control" id="correo" name="correo" placeholder="Usuario de Empleado">
                                 </div>
                                 <div class="col-md-2">
-                                    <input type="password" class="form-control" placeholder="Contraseña">
+                                    <input type="text" class="form-control" id="telefono" name="telefono" placeholder="Teléfono">
+                                </div>
+                                <div class="col-md-2">
+                                    <input type="password" class="form-control" id="contrasena" name="contrasena" placeholder="Contraseña">
+                                </div>
+                                <div class="col-md-2">
+                                        <select class="form-select" id="selectRestaurante" name="restaurante">
+                                        </select>
                                 </div>
                                 <div class="col-md-2">
                                     <select class="form-select" id="selectRol">
-                                        <option value="" disabled selected>Selecciona un rol</option>
-                                        <option value="1">Administrador</option>
-                                        <option value="2">Empleado</option>
                                     </select>
                                 </div>
                                 <div class="col-md-2">
-                                    <input type="text" class="form-control" placeholder="Restaurante" id="selectRestaurante">
-                                </div>
-                                <div class="col-md-2">
-                                    <button type="submit" class="btn btn-success">Crear</button>
+                                    <button type="submit" class="btn btn-success" >Crear</button>
                                     <button type="reset" class="btn btn-danger">Cancelar</button>
                                 </div>
                             </div>
