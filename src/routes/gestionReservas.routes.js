@@ -10,5 +10,8 @@ router.get('/reporteReservas', (req, res) => {
     res.render('Admin/reporteReservas');
 });
 
+router.get('/reserva', (req, res) => {
+    res.render('users/reserva');
+});
 
 export default router;
