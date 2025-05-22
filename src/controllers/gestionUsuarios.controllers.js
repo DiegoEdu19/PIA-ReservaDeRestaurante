@@ -63,10 +63,38 @@ export const agregarEmpleado = async (req, res) => {
 
 export const editarEmpleado = async (req, res) => {
   try {
-    
+    const { id } = req.params;
+    const { nombre, apellidos, correo, telefono, contrasena, id_rol, id_restaurante } = req.body;
+
+    if (!id) return res.status(400).json({ mensaje: "ID requerido" });
+
+    // Opcional: validar campos obligatorios, etc.
+
+    // Puedes hacer lógica para no actualizar la contraseña si viene vacía
+    let query, params;
+    if (contrasena && contrasena.trim() !== '') {
+      query = `UPDATE empleado 
+               SET nombre=$1, apellidos=$2, correo=$3, telefono=$4, contrasena=$5, id_rol=$6, id_restaurante=$7
+               WHERE id_empleado=$8 RETURNING *`;
+      params = [nombre, apellidos, correo, telefono, contrasena, id_rol, id_restaurante, id];
+    } else {
+      query = `UPDATE empleado 
+               SET nombre=$1, apellidos=$2, correo=$3, telefono=$4, id_rol=$5, id_restaurante=$6
+               WHERE id_empleado=$7 RETURNING *`;
+      params = [nombre, apellidos, correo, telefono, id_rol, id_restaurante, id];
+    }
+
+    const result = await pool.query(query, params);
+
+    if (result.rowCount === 0) {
+      return res.status(404).json({ mensaje: "Empleado no encontrado" });
+    }
+
+    res.json({ mensaje: "Empleado actualizado correctamente", empleado: result.rows[0] });
+
   } catch (error) {
-    console.error("Error al editar empleado:", error);
-    res.status(500).send("Error interno del servidor");
+    console.error("Error al actualizar empleado:", error);
+    res.status(500).json({ mensaje: "Error interno del servidor" });
   }
 };
 
@@ -110,5 +138,22 @@ export const eliminarEmpleado = async (req, res) => {
   } catch (error) {
     console.error("Error al eliminar empleado:", error);
     res.status(500).json({ mensaje: "Error interno del servidor", detalle: error.message });
+  }
+};
+
+export const obtenerEmpleadoPorId = async (req, res) => {
+  try {
+    const { id } = req.params;
+    if (!id) return res.status(400).json({ mensaje: "ID requerido" });
+
+    const result = await pool.query('SELECT * FROM empleado WHERE id_empleado = $1', [id]);
+    if (result.rowCount === 0) {
+      return res.status(404).json({ mensaje: "Empleado no encontrado" });
+    }
+
+    res.json(result.rows[0]);
+  } catch (error) {
+    console.error("Error al obtener empleado:", error);
+    res.status(500).json({ mensaje: "Error interno del servidor" });
   }
 };

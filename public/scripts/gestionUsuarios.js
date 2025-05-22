@@ -12,10 +12,11 @@ function cargarEmpleados() {
             <td>${empleado.nombre} ${empleado.apellidos}</td>
             <td>${empleado.correo}</td>
             <td>${empleado.telefono}</td>
+            <td>${empleado.contrasena}</td>
             <td>${empleado.nombre_rol || empleado.id_rol}</td>
             <td>${empleado.id_restaurante}</td>
             <td>
-              <button class="btn btn-sm btn-primary"><i class="bi bi-pencil"></i></button>
+              <button class="btn btn-sm btn-primary editarEmpleado" data-id="${empleado.id_empleado}"><i class="bi bi-pencil"></i></button>
               <button class="btn btn-sm btn-danger eliminarEmpleado" data-id="${empleado.id_empleado}""><i class="bi bi-trash"></i></button>
             </td>
           </tr>
@@ -60,6 +61,35 @@ function cargarEmpleados() {
       alert("Error en la solicitud: " + error.message);
     }
   });
+
+  $('#empleados-tbody').on('click', '.editarEmpleado', async function () {
+  const idEmpleado = $(this).data('id');
+
+  try {
+    const response = await fetch(`/usuarios/${idEmpleado}`); // GET empleado por ID
+    if (!response.ok) throw new Error("Error al obtener datos");
+
+    const empleado = await response.json();
+
+    // Llenar el formulario con datos actuales
+    $('#nombre').val(empleado.nombre);
+    $('#apellidos').val(empleado.apellidos);
+    $('#correo').val(empleado.correo);
+    $('#telefono').val(empleado.telefono);
+    $('#contrasena').val('');  // Por seguridad, no mostrar la contraseña, el usuario debe ponerla si quiere cambiarla
+    $('#selectRol').val(empleado.id_rol);
+    $('#selectRestaurante').val(empleado.id_restaurante);
+
+    // Guardar el id en un input oculto o variable global para el PUT
+    $('#form-agregar-empleado').data('edit-id', idEmpleado);
+
+    // Cambiar texto o estado del botón para indicar que estás editando
+    $('#btn-submit-empleado').text('Guardar cambios');
+
+  } catch (error) {
+    alert('Error al cargar datos del empleado: ' + error.message);
+  }
+});
   // Cargar restaurantes
   fetch('/api/restaurantes')
   .then(res => res.json())
@@ -89,9 +119,11 @@ fetch('/api/roles')
 
 
 $('#form-agregar-empleado').submit(async function (e) {
-  e.preventDefault();
+   e.preventDefault();
 
-  const nuevoEmpleado = {
+  const idEmpleadoEditar = $(this).data('edit-id'); // Detecta si está en modo edición
+
+  const empleadoData = {
     nombre: $('#nombre').val().trim(),
     apellidos: $('#apellidos').val().trim(),
     correo: $('#correo').val().trim(),
@@ -101,42 +133,67 @@ $('#form-agregar-empleado').submit(async function (e) {
     id_restaurante: $('#selectRestaurante').val()
   };
 
-  // Validación: verificar si hay campos vacíos
+  // Validación de campos vacíos (igual que antes)
   if (
-    !nuevoEmpleado.nombre ||
-    !nuevoEmpleado.apellidos ||
-    !nuevoEmpleado.correo ||
-    !nuevoEmpleado.telefono ||
-    !nuevoEmpleado.contrasena ||
-    !nuevoEmpleado.id_rol ||
-    !nuevoEmpleado.id_restaurante
+    !empleadoData.nombre ||
+    !empleadoData.apellidos ||
+    !empleadoData.correo ||
+    !empleadoData.telefono ||
+    (!idEmpleadoEditar && !empleadoData.contrasena) ||  // Si es creación la contraseña es obligatoria, en edición no es obligatorio cambiarla
+    !empleadoData.id_rol ||
+    !empleadoData.id_restaurante
   ) {
     alert("Por favor, completa todos los campos antes de continuar.");
     return;
   }
 
   try {
-    const response = await fetch('/agregarUsuarios', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify(nuevoEmpleado)
-    });
+    let response, resultado;
 
-    const resultado = await response.json();
+    if (idEmpleadoEditar) {
+      // Modo edición - PUT
+      response = await fetch(`/usuarios/${idEmpleadoEditar}`, {
+        method: 'PUT',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(empleadoData),
+      });
+      resultado = await response.json();
 
-    if (!response.ok) {
-      alert("Error: " + (resultado.mensaje || "Error desconocido"));
-      throw new Error(resultado.mensaje || "Error en la respuesta del servidor");
+      if (!response.ok) {
+        alert("Error al actualizar: " + (resultado.mensaje || "Error desconocido"));
+        return;
+      }
+
+      alert("Empleado actualizado correctamente");
+
+      // Resetear el modo edición
+      $(this).removeData('edit-id');
+      $('#btn-submit-empleado').text('Crear empleado');
+
+    } else {
+      // Modo creación - POST
+      response = await fetch('/agregarUsuarios', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(empleadoData),
+      });
+      resultado = await response.json();
+
+      if (!response.ok) {
+        alert("Error: " + (resultado.mensaje || "Error desconocido"));
+        return;
+      }
+
+      alert("Empleado agregado correctamente");
     }
 
-    alert("Empleado agregado correctamente");
-    // Limpia el formulario si deseas
+    // Limpiar formulario y recargar tabla
     $('#form-agregar-empleado')[0].reset();
     cargarEmpleados();
+
   } catch (error) {
-    console.error("Error al agregar empleado:", error);
+    console.error("Error en la operación:", error);
+    alert("Error en la operación: " + error.message);
   }
 });
 

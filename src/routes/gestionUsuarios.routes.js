@@ -5,7 +5,8 @@ import {
   editarEmpleado,
   eliminarEmpleado,
   obtenerRestaurantes,
-  obtenerRoles
+  obtenerRoles,
+  obtenerEmpleadoPorId
 } from '../controllers/gestionUsuarios.controllers.js';
 
 const router = express.Router();
@@ -20,5 +21,6 @@ router.put('/usuarios/:id', editarEmpleado);
 router.delete('/usuarios/:id', eliminarEmpleado);
 router.get('/api/restaurantes', obtenerRestaurantes);
 router.get('/api/roles', obtenerRoles);
+router.get('/usuarios/:id', obtenerEmpleadoPorId);
 
 export default router;
