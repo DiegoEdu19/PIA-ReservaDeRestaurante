@@ -70,15 +70,6 @@ export const editarEmpleado = async (req, res) => {
   }
 };
 
-export const eliminarEmpleado = async (req, res) => {
-  try {
-    
-  } catch (error) {
-    console.error("Error al eliminar empleado:", error);
-    res.status(500).send("Error interno del servidor");
-  }
-};
-
 export const obtenerRestaurantes = async (req, res) => {
   try {
     const result = await pool.query('SELECT id_restaurante AS id, nombre FROM restaurante'); 
@@ -96,5 +87,28 @@ export const obtenerRoles = async (req, res) => {
   } catch (error) {
     console.error('Error al obtener roles:', error);
     res.status(500).json({ error: 'Error interno del servidor', detalle: error.message });
+  }
+};
+
+export const eliminarEmpleado = async (req, res) => {
+  try {
+    const { id } = req.params;
+
+    // Validar que el id exista
+    if (!id) {
+      return res.status(400).json({ mensaje: "ID de empleado es requerido" });
+    }
+
+    // Ejecutar eliminación
+    const result = await pool.query('DELETE FROM empleado WHERE id_empleado = $1 RETURNING *', [id]);
+
+    if (result.rowCount === 0) {
+      return res.status(404).json({ mensaje: "Empleado no encontrado" });
+    }
+
+    res.json({ mensaje: "Empleado eliminado correctamente", empleado: result.rows[0] });
+  } catch (error) {
+    console.error("Error al eliminar empleado:", error);
+    res.status(500).json({ mensaje: "Error interno del servidor", detalle: error.message });
   }
 };

@@ -16,7 +16,7 @@ function cargarEmpleados() {
             <td>${empleado.id_restaurante}</td>
             <td>
               <button class="btn btn-sm btn-primary"><i class="bi bi-pencil"></i></button>
-              <button class="btn btn-sm btn-danger"><i class="bi bi-trash"></i></button>
+              <button class="btn btn-sm btn-danger eliminarEmpleado" data-id="${empleado.id_empleado}""><i class="bi bi-trash"></i></button>
             </td>
           </tr>
         `;
@@ -33,6 +33,33 @@ function cargarEmpleados() {
   // Cargar empleados (tu código ya está)
   cargarEmpleados();
 
+    $('#empleados-tbody').on('click','.eliminarEmpleado', async function () {
+    const idEmpleado = $(this).data('id');
+
+    if (!idEmpleado) {
+      alert("ID de empleado no encontrado");
+      return;
+    }
+
+    if (!confirm("¿Estás seguro que deseas eliminar este empleado?")) return;
+
+    try {
+      const response = await fetch(`/usuarios/${idEmpleado}`, {
+        method: 'DELETE',
+      });
+
+      const data = await response.json();
+
+      if (response.ok) {
+        alert(data.mensaje);
+        cargarEmpleados();
+      } else {
+        alert("Error al eliminar: " + (data.mensaje || "Error desconocido"));
+      }
+    } catch (error) {
+      alert("Error en la solicitud: " + error.message);
+    }
+  });
   // Cargar restaurantes
   fetch('/api/restaurantes')
   .then(res => res.json())
@@ -107,7 +134,7 @@ $('#form-agregar-empleado').submit(async function (e) {
     alert("Empleado agregado correctamente");
     // Limpia el formulario si deseas
     $('#form-agregar-empleado')[0].reset();
-
+    cargarEmpleados();
   } catch (error) {
     console.error("Error al agregar empleado:", error);
   }
