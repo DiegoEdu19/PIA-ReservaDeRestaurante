@@ -65,14 +65,28 @@ $('#form-agregar-empleado').submit(async function (e) {
   e.preventDefault();
 
   const nuevoEmpleado = {
-    nombre: $('#nombre').val(),
-    apellidos: $('#apellidos').val(),
-    correo: $('#correo').val(),
-    telefono: $('#telefono').val(),
-    contrasena: $('#contrasena').val(),
+    nombre: $('#nombre').val().trim(),
+    apellidos: $('#apellidos').val().trim(),
+    correo: $('#correo').val().trim(),
+    telefono: $('#telefono').val().trim(),
+    contrasena: $('#contrasena').val().trim(),
     id_rol: $('#selectRol').val(),
     id_restaurante: $('#selectRestaurante').val()
   };
+
+  // Validación: verificar si hay campos vacíos
+  if (
+    !nuevoEmpleado.nombre ||
+    !nuevoEmpleado.apellidos ||
+    !nuevoEmpleado.correo ||
+    !nuevoEmpleado.telefono ||
+    !nuevoEmpleado.contrasena ||
+    !nuevoEmpleado.id_rol ||
+    !nuevoEmpleado.id_restaurante
+  ) {
+    alert("Por favor, completa todos los campos antes de continuar.");
+    return;
+  }
 
   try {
     const response = await fetch('/agregarUsuarios', {
@@ -83,17 +97,19 @@ $('#form-agregar-empleado').submit(async function (e) {
       body: JSON.stringify(nuevoEmpleado)
     });
 
+    const resultado = await response.json();
+
     if (!response.ok) {
-      throw new Error('Error en la respuesta del servidor');
+      alert("Error: " + (resultado.mensaje || "Error desconocido"));
+      throw new Error(resultado.mensaje || "Error en la respuesta del servidor");
     }
 
-    const data = await response.json();
-    console.log('Empleado agregado:', data);
-
-    cargarEmpleados();
-    this.reset(); // Limpiar formulario
+    alert("Empleado agregado correctamente");
+    // Limpia el formulario si deseas
+    $('#form-agregar-empleado')[0].reset();
 
   } catch (error) {
-    console.error('Error al agregar empleado:', error);
+    console.error("Error al agregar empleado:", error);
   }
 });
+

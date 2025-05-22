@@ -5,7 +5,7 @@ export const getEmpleados = async (req, res) => {
     const result = await pool.query(
       "SELECT * FROM empleado JOIN rol ON empleado.id_rol = rol.id_rol"
     );
-    console.log(JSON.stringify(result, null, 2));
+    console.log(JSON.stringify(result.rows, null, 2));
     res.json(result.rows);
   } catch (error) {
     console.error("Error al obtener empleados:", error);
@@ -22,6 +22,28 @@ export const agregarEmpleado = async (req, res) => {
       return res.status(400).json({ mensaje: "Todos los campos son obligatorios." });
     }
 
+    // Validación de correo duplicado
+    const correoExiste = await pool.query('SELECT 1 FROM empleado WHERE correo = $1', [correo]);
+    if (correoExiste.rowCount > 0) {
+      return res.status(400).json({ mensaje: "El correo ya está registrado." });
+    }
+
+    // Validación de teléfono duplicado
+    const telefonoExiste = await pool.query('SELECT 1 FROM empleado WHERE telefono = $1', [telefono]);
+    if (telefonoExiste.rowCount > 0) {
+      return res.status(400).json({ mensaje: "El teléfono ya está registrado." });
+    }
+
+    // Validación de nombre y apellidos duplicados
+    const nombreExiste = await pool.query(
+      'SELECT 1 FROM empleado WHERE nombre = $1 AND apellidos = $2',
+      [nombre, apellidos]
+    );
+    if (nombreExiste.rowCount > 0) {
+      return res.status(400).json({ mensaje: "Ya existe un empleado con ese nombre y apellidos." });
+    }
+
+    // Si pasa todas las validaciones, insertar
     const query = `
       INSERT INTO empleado (nombre, apellidos, correo, telefono, contrasena, id_rol, id_restaurante)
       VALUES ($1, $2, $3, $4, $5, $6, $7)
@@ -29,13 +51,13 @@ export const agregarEmpleado = async (req, res) => {
     `;
 
     const values = [nombre, apellidos, correo, telefono, contrasena, id_rol, id_restaurante];
-
     const result = await pool.query(query, values);
 
     res.status(201).json({ mensaje: "Empleado agregado correctamente", empleado: result.rows[0] });
+
   } catch (error) {
     console.error("Error al agregar empleado:", error);
-    res.status(500).send("Error interno del servidor");
+    res.status(500).json({ mensaje: "Error interno del servidor", detalle: error.message });
   }
 };
 
