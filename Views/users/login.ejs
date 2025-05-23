@@ -14,10 +14,10 @@
 <%- include('../partials/navbar') %>
 
 <div class="login-container">
-    <form class="login-card" action="#" method="post">
+    <form class="login-card" action="#" method="post" id="login">
       <h2 class="login-title">Iniciar Sesión</h2>
       <div class="mb-3">
-        <label for="email" class="form-label">Correo electrónico</label>
+        <label for="email" class="form-label" >Correo electrónico</label>
         <input type="email" class="form-control" id="email" name="email" placeholder="Ingresa tu correo" required>
       </div>
       <div class="mb-3">
@@ -26,7 +26,11 @@
       </div>
       <button type="submit" class="btn btn-danger">Iniciar sesión</button>
     </form>
-  </div>
-
+</div>
 
 </body>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+<script src="/scripts/login.js"></script>
+
+</html>

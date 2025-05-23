@@ -10,6 +10,7 @@ import reportesRouter from './routes/gestionReservas.routes.js';
 import gestionHorarios from './routes/gestionHorarios.routes.js';
 import gestionDisponibilidad from './routes/gestionDisponibilidad.routes.js';
 import gestionMenuRouter from './routes/gestionMenu.routes.js';
+import authenticationRoutes from "./routes/authentication.routes.js";
 
 // Necesario para __dirname en ESM
 const __filename = fileURLToPath(import.meta.url);
@@ -35,6 +36,7 @@ app.use(reportesRouter);
 app.use(gestionHorarios);
 app.use(gestionDisponibilidad);
 app.use(gestionMenuRouter);
+app.use(authenticationRoutes);
 
 app.listen(port, () => {
   console.log(`Servidor corriendo en http://localhost:${port}/`);
