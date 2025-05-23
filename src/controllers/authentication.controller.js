@@ -2,7 +2,6 @@ import { pool } from "../db.js"
 import bcrypt from "bcrypt"
 import jwt from "jsonwebtoken"
 
-// ✅ LOGIN
 const login = async (req, res) => {
     const { correo, contrasena } = req.body
     console.log("📥 Datos recibidos:", req.body)
@@ -22,19 +21,17 @@ const login = async (req, res) => {
         }
 
         const user = userResult.rows[0]
-        console.log("🔎 Usuario encontrado:", user.correo, user.contrasena)
+        console.log(" Usuario encontrado:", user.correo, user.contrasena)
 
-        // 🔐 Verificar contraseña
-        console.log("🔒 Hash en DB:", user.contrasena)
+        console.log(" Hash en DB:", user.contrasena)
 
         const isPasswordValid = await bcrypt.compare(contrasena, user.contrasena)
-        console.log("✅ ¿Contraseña válida?", isPasswordValid)
+        console.log(" ¿Contraseña válida?", isPasswordValid)
 
         if (!isPasswordValid) {
             return res.status(400).json({ error: "Contraseña incorrecta" })
         }
 
-        // 🛡️ Crear token JWT
         const token = jwt.sign(
             {
                 id: user.id,
@@ -45,13 +42,11 @@ const login = async (req, res) => {
             { expiresIn: "2h" }
         )
 
-        // 🍪 Guardar token como cookie httpOnly
         res.cookie("token", token, {
             httpOnly: true,
-            maxAge: 2 * 60 * 60 * 1000 // 2 horas
+            maxAge: 2 * 60 * 60 * 1000 
         })
 
-        // ✅ Redirigir por tipo de usuario
         const redirectUrl =  "/disponibilidad"
 
         return res.status(200).json({
@@ -60,7 +55,7 @@ const login = async (req, res) => {
         })
 
     } catch (error) {
-        console.error("❌ Error en login:", error.message)
+        console.error(" Error en login:", error.message)
         return res.status(500).json({ error: "Error interno del servidor" })
     }
 }
