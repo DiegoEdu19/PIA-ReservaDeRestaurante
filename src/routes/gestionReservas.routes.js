@@ -17,10 +17,10 @@ router.get('/reserva', (req, res) => {
 
 router.get('/listar', obtenerReservas);
 
-router.post('/reservas/:id', crearReservas);
+router.post('/reservas', crearReservas);
 
 router.get('/estados', traerEstados);
 
-router.delete('/eliminarReservas', eliminarReserva)
+router.delete('/reservasE/:id', eliminarReserva);
 
 export default router;
