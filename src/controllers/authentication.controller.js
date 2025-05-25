@@ -13,7 +13,7 @@ const login = async (req, res) => {
     try {
         // Buscar usuario por correo
         const userResult = await pool.query(
-            'SELECT * FROM "empleado" WHERE correo = $1',
+            'SELECT id_empleado, correo, contrasena, id_rol FROM "empleado" WHERE correo = $1',
             [correo]
         );
 
@@ -37,8 +37,8 @@ const login = async (req, res) => {
 
             // Actualizar contraseña en la base de datos
             await pool.query(
-                'UPDATE "empleado" SET contrasena = $1 WHERE id_empleado = $2',
-                [hashedPassword, user.id]
+                'UPDATE "empleado" SET contrasena = $1 WHERE correo = $2',
+                [hashedPassword, correo]
             );
 
             isPasswordValid = true; // Ya validamos que coinciden
