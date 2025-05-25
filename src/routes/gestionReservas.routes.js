@@ -1,5 +1,5 @@
 import express from 'express';
-import { obtenerReservas, crearReservas, traerEstados } from '../controllers/gestionReservas.controllers.js';
+import { obtenerReservas, crearReservas, traerEstados, eliminarReserva } from '../controllers/gestionReservas.controllers.js';
 
 const router = express.Router();
 
@@ -17,8 +17,10 @@ router.get('/reserva', (req, res) => {
 
 router.get('/listar', obtenerReservas);
 
-router.post('/reservas', crearReservas);
+router.post('/reservas/:id', crearReservas);
 
 router.get('/estados', traerEstados);
+
+router.delete('/eliminarReservas', eliminarReserva)
 
 export default router;

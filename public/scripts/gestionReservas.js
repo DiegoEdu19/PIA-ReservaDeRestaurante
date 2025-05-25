@@ -32,7 +32,7 @@ $(document).ready(function () {
                             <td>${reserva.id_restaurante}</td>       
                             <td>
                                 <button class="btn btn-sm btn-warning"><i class="bi bi-pencil"></i></button>
-                                <button class="btn btn-sm btn-danger"><i class="bi bi-trash"></i></button>
+                                <button class="btn btn-sm btn-danger btn-eliminar-reserva" data-id="${reserva.id_reserva}"><i class="bi bi-trash"></i></button>
                             </td>
                         </tr>
                     `;
@@ -77,25 +77,25 @@ $(document).ready(function () {
     }
 
     function cargarRestaurante() {
-        fetch('/api/restaurantes')
-            .then(response => {
-                if (!response.ok) {
-                    return response.text().then(text => { throw new Error(text) });
-                }
-                return response.json();
-            })
-            .then(estados => {
-                const $select = $('#restaurante');
-                $select.empty();
-                estados.forEach(estado => {
-                $select.append(`<option value="${restaurante.id_restaurante}">${restaurante.nombre}</option>`);
-                });
-            })
-            .catch(error => {
-                console.error('Error al cargar los estados de reserva:', error);
-                $('#estado').append('<option disabled>Error al cargar estados</option>');
+    fetch('/api/restaurantes')
+        .then(response => {
+            if (!response.ok) {
+                return response.text().then(text => { throw new Error(text) });
+            }
+            return response.json();
+        })
+        .then(restaurantes => {
+            const $select = $('#restaurante');
+            $select.empty();
+            restaurantes.forEach(restaurante => {
+                $select.append(`<option value="${restaurante.id}">${restaurante.nombre}</option>`);
             });
-    }
+        })
+        .catch(error => {
+            console.error('Error al cargar los restaurantes:', error);
+            $('#restaurante').append('<option disabled>Error al cargar restaurantes</option>');
+        });
+}
     // --- Evento para agregar nueva reserva ---
     $('#form-agregar-reserva').on('submit', function (e) {
         e.preventDefault();
@@ -107,7 +107,8 @@ $(document).ready(function () {
             hora: $('#hora').val(),
             hora_fin: $('#hora_fin').val(),
             telefono: $('#telefono').val(),
-            estado_id: $('#estado').val()
+            estado_id: $('#estado').val(),
+            id_restaurante: $('#restaurante').val()
         };
 
         fetch('/reservas', {
@@ -138,6 +139,34 @@ $(document).ready(function () {
     cargarReservas();
     cargarEstadosReserva();
     cargarRestaurante()
+});
+
+$(document).on('click', '.btn-eliminar-reserva', function (e) {
+    e.preventDefault();
+    const idReserva = $(this).data('id'); 
+    if (!idReserva) {
+        alert('No se pudo obtener el ID de la reserva.');
+        return;
+    }
+    if (confirm('¿Seguro que deseas eliminar esta reserva?')) {
+        fetch(`/reservas/${idReserva}`, {
+            method: 'DELETE'
+        })
+        .then(response => {
+            if (!response.ok) {
+                return response.text().then(text => { throw new Error(text) });
+            }
+            return response.json();
+        })
+        .then(() => {
+            alert('Reserva eliminada exitosamente');
+            cargarReservas();
+        })
+        .catch(error => {
+            alert('Error al eliminar la reserva');
+            console.error('Error al eliminar la reserva:', error);
+        });
+    }
 });
 
   
