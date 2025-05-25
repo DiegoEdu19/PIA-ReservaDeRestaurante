@@ -68,3 +68,53 @@ export const eliminarReserva = async (req, res) => {
         res.status(500).json({ message: 'Error al eliminar la reserva' });
     }
 };
+
+export const traerPorId = async (req, res) => {
+    const id = req.params.id;
+    try {
+        const result = await pool.query('SELECT * FROM reserva WHERE id_reserva = $1', [id]);
+
+        if (result.rows.length === 0) {
+            return res.status(404).json({ error: 'Reserva no encontrada' });
+        }
+
+        res.json(result.rows[0]);
+    } catch (error) {
+        console.error('Error al obtener la reserva:', error);
+        res.status(500).json({ error: 'Error interno del servidor' });
+    }
+};
+
+export const editarReserva = async (req, res) => {
+    const id = req.params.id;
+    const {
+        nombre,
+        cantidad_personas,
+        fecha,
+        hora_inicio,
+        hora_fin,
+        telefono,
+        estado_id,
+        id_restaurante
+    } = req.body;
+
+    try {
+        await pool.query(`
+            UPDATE reserva
+            SET nombre = $1,
+                cantidad_personas = $2,
+                fecha = $3,
+                hora_inicio = $4,
+                hora_fin = $5,
+                telefono = $6,
+                id_estado = $7,
+                id_restaurante = $8
+            WHERE id_reserva = $9
+        `, [nombre, cantidad_personas, fecha, hora_inicio, hora_fin, telefono, estado_id, id_restaurante, id]);
+
+        res.json({ message: 'Reserva actualizada correctamente' });
+    } catch (error) {
+        console.error('Error al actualizar reserva:', error);
+        res.status(500).json({ error: 'Error al actualizar la reserva' });
+    }
+};
