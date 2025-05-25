@@ -33,29 +33,23 @@
 
     <div class="card-body m-auto">
         <ul class="nav nav-pills">
-                <button type="button" class="btn btn-light dropdown-toggle mx-3" data-bs-toggle="dropdown" href="#" aria-expanded="false">Personas</button>
-                <ul class="dropdown-menu">
-
-                </ul>
-                <button type="button" class="btn btn-light dropdown-toggle mx-3" data-bs-toggle="dropdown" href="#" aria-expanded="false">Fecha</button>
-                <ul class="dropdown-menu">
-
-                </ul>
-                <button type="button" class="btn btn-light dropdown-toggle mx-3" data-bs-toggle="dropdown" href="#" aria-expanded="false">Hora</button>
-                <ul class="dropdown-menu">
-
-                </ul>
-                <button type="button" class="btn btn-light dropdown-toggle mx-3" data-bs-toggle="dropdown" href="#" aria-expanded="false">Mostrar horarios</button>
-                <ul class="dropdown-menu">
-
-                </ul>
+            <>
+                <input type="number" class="btn btn-light mx-2" style="width:70px;" data-bs-toggle="dropdown" href="#" aria-expanded="false"name="cantidad_personas" id="personas">
+                Personas
+                <input type="date" class="btn btn-light dropdown-toggle mx-2" id="fecha" name="fecha">
+                fecha
+                <input type="time" class="btn btn-light dropdown-toggle mx-2" data-bs-toggle="dropdown" href="#" aria-expanded="false"name="hora_inicio" id="hora">Hora_Inicio</input>
+            </form>
         </ul>
+        <button type="button" class="btn btn-light dropdown-toggle mx-3" data-bs-toggle="dropdown" href="#" aria-expanded="false"name="mostrar_horarios">Mostrar horarios disponibles</button>
+        <ul class="dropdown-menu" id="horarios_disponibles">
 
-        <button type="button" class="btn btn-danger" id="btn-reserva">Reservar</button>
-
-
-
+        </ul>
+        <button type="button" class="btn btn-danger" id="btn_datos">Siguiente</button>
     </div>
+
+
+
 
 
     <div class="card-footer">
@@ -132,6 +126,8 @@
         text-align: right;
     }
 </style>
+
+<script src="/scripts/creacionReserva.js"></script>
 
 </body>
 </html>

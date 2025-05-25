@@ -3,7 +3,7 @@ import { pool } from '../db.js';
 export const getEmpleados = async (req, res) => {
   try {
     const result = await pool.query(
-      "SELECT * FROM empleado JOIN rol ON empleado.id_rol = rol.id_rol"
+        "SELECT * FROM empleado JOIN rol ON empleado.id_rol = rol.id_rol"
     );
     console.log(JSON.stringify(result.rows, null, 2));
     res.json(result.rows);

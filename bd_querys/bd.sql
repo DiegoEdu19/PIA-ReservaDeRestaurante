@@ -194,3 +194,9 @@ CREATE TRIGGER tr_validar_horario_reserva
     BEFORE INSERT OR UPDATE ON reserva
     FOR EACH ROW
 EXECUTE FUNCTION validar_horario_reserva();
+
+ALTER TABLE reserva ALTER COLUMN hora_fin DROP NOT NULL;
+ALTER TABLE reserva ALTER COLUMN apellido DROP NOT NULL;
+ALTER TABLE horario_restaurante ALTER COLUMN capacidad DROP NOT NULL;
+ALTER TABLE horario_restaurante ALTER COLUMN hora_apertura DROP NOT NULL;
+ALTER TABLE horario_restaurante ALTER COLUMN hora_cierre DROP NOT NULL;
