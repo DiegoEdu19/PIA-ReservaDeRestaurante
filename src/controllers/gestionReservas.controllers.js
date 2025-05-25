@@ -20,7 +20,35 @@ export const obtenerReservas = async (req, res) => {
     `);
     res.json(result.rows);
   } catch (error) {
-    console.error('Error al obtener reservas:', error); // ¡Lee esto en tu terminal!
+    console.error('Error al obtener reservas:', error);
     res.status(500).json({ mensaje: 'Error al obtener reservas' });
   }
+};
+
+export const crearReservas = async (req, res) => {
+    const { nombre, personas, fecha, hora, hora_fin, telefono, estado_id } = req.body;
+    if (!hora_fin) {
+        return res.status(400).json({ error: "Debe proporcionar la hora de fin." });
+    }
+
+    try {
+        await pool.query(
+            'INSERT INTO reserva (nombre, cantidad_personas, fecha, hora_inicio, hora_fin, telefono, id_estado) VALUES ($1, $2, $3, $4, $5, $6, $7)',
+            [nombre, personas, fecha, hora, hora_fin, telefono, estado_id]
+        );
+        res.status(201).json({ message: 'Reserva creada' });
+    } catch (error) {
+        console.error('Error al crear reserva:', error);
+        res.status(500).json({ message: 'Error al crear la reserva' });
+    }
+};
+
+export const traerEstados = async (req, res) => {
+    try {
+        const resultado = await pool.query('SELECT id_estado, descripcion FROM estado_reserva');
+        res.json(resultado.rows);
+    } catch (error) {
+        console.error('Error al obtener estados de reserva:', error);
+        res.status(500).json({ message: 'Error al obtener estados de reserva' });
+    }
 };
