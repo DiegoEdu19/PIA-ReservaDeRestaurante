@@ -32,25 +32,36 @@
     </div>
 
     <div class="card-body m-auto">
-        <ul class="nav nav-pills">
-            <>
-                <input type="number" class="btn btn-light mx-2" style="width:70px;" data-bs-toggle="dropdown" href="#" aria-expanded="false"name="cantidad_personas" id="personas">
-                Personas
-                <input type="date" class="btn btn-light dropdown-toggle mx-2" id="fecha" name="fecha">
-                fecha
-                <input type="time" class="btn btn-light dropdown-toggle mx-2" data-bs-toggle="dropdown" href="#" aria-expanded="false"name="hora_inicio" id="hora">Hora_Inicio</input>
-            </form>
-        </ul>
-        <button type="button" class="btn btn-light dropdown-toggle mx-3" data-bs-toggle="dropdown" href="#" aria-expanded="false"name="mostrar_horarios">Mostrar horarios disponibles</button>
-        <ul class="dropdown-menu" id="horarios_disponibles">
 
-        </ul>
-        <button type="button" class="btn btn-danger" id="btn_datos">Siguiente</button>
+        <!-- Formulario principal -->
+        <div id="formulario-principal">
+                <h5>Datos de reserva</h5>
+                <div class="row">
+                    Personas
+                    <input type="number" class="form-control mb-2" style="width:70px;" name="cantidad_personas" id="personas" placeholder="20">
+                    Hora_inicio
+                    <input type="time" class="form-control mb-2"style="width: 125px;" name="hora_inicio" id="hora">
+                </div>
+            <div class="row">
+                Fecha
+                <input type="date" class="form-control mb-2" id="fecha" name="fecha" placeholder="2023-01-01" style="width: 175px;">
+                <button type="button" class="form-control mb-2" name="mostrar_horarios" >Mostrar horarios disponibles</button>
+                <ul class="dropdown-menu" id="horarios_disponibles"></ul>
+                <button type="button" class="btn btn-danger" id="btn_datos">Siguiente</button>
+            </div>
+        </div>
+
+        <!-- Formulario adicional oculto -->
+        <div id="formulario-adicional" style="display: none;">
+            <h5>Tus datos</h5>
+            <input type="text" class="form-control mb-2" placeholder="Nombre" id="nombre">
+            <input type="email" class="form-control mb-2" placeholder="Correo electrónico" id="correo">
+            <input type="tel" class="form-control mb-2" placeholder="Teléfono" id="telefono">
+            <button type="button" class="btn btn-secondary" id="btn_volver">Volver</button>
+            <button type="submit" class="btn btn-danger">Enviar</button>
+        </div>
+
     </div>
-
-
-
-
 
     <div class="card-footer">
         <ul>

@@ -1,3 +1,15 @@
+
+
+document.getElementById("btn_datos").addEventListener("click", function () {
+    document.getElementById("formulario-principal").style.display = "none";
+    document.getElementById("formulario-adicional").style.display = "block";
+});
+
+document.getElementById("btn_volver").addEventListener("click", function () {
+    document.getElementById("formulario-adicional").style.display = "none";
+    document.getElementById("formulario-principal").style.display = "block";
+});
+
 $('#form-agregar-reserva').on('submit', function (e) {
     e.preventDefault();
 
