@@ -26,7 +26,7 @@ export const obtenerReservas = async (req, res) => {
 };
 
 export const crearReservas = async (req, res) => {
-    const { nombre, personas, fecha, hora, hora_fin, telefono, estado_id, id_restaurante } = req.body;
+    const { nombre, cantidad_personas, fecha, hora_inicio, hora_fin, telefono, estado_id, id_restaurante } = req.body;
     if (!hora_fin) {
         return res.status(400).json({ error: "Debe proporcionar la hora de fin." });
     }
@@ -36,7 +36,7 @@ export const crearReservas = async (req, res) => {
     try {
         await pool.query(
             'INSERT INTO reserva (nombre, cantidad_personas, fecha, hora_inicio, hora_fin, telefono, id_estado, id_restaurante) VALUES ($1, $2, $3, $4, $5, $6, $7, $8)',
-            [nombre, personas, fecha, hora, hora_fin, telefono, estado_id, id_restaurante]
+            [nombre, cantidad_personas, fecha, hora_inicio, hora_fin, telefono, estado_id, id_restaurante]
         );
         res.status(201).json({ message: 'Reserva creada' });
     } catch (error) {
