@@ -32,7 +32,7 @@ $(document).ready(function () {
                             <td>${reserva.id_restaurante}</td>       
                             <td>
                                 <button class="btn btn-sm btn-warning"><i class="bi bi-pencil"></i></button>
-                                <button class="btn btn-sm btn-danger"><i class="bi bi-trash"></i></button>
+                                <button class="btn btn-sm btn-danger btn-eliminar-reserva" data-id="${reserva.id_reserva}"><i class="bi bi-trash"></i></button>
                             </td>
                         </tr>
                     `;
@@ -139,6 +139,34 @@ $(document).ready(function () {
     cargarReservas();
     cargarEstadosReserva();
     cargarRestaurante()
+});
+
+$(document).on('click', '.btn-eliminar-reserva', function (e) {
+    e.preventDefault();
+    const idReserva = $(this).data('id'); 
+    if (!idReserva) {
+        alert('No se pudo obtener el ID de la reserva.');
+        return;
+    }
+    if (confirm('¿Seguro que deseas eliminar esta reserva?')) {
+        fetch(`/reservas/${idReserva}`, {
+            method: 'DELETE'
+        })
+        .then(response => {
+            if (!response.ok) {
+                return response.text().then(text => { throw new Error(text) });
+            }
+            return response.json();
+        })
+        .then(() => {
+            alert('Reserva eliminada exitosamente');
+            cargarReservas();
+        })
+        .catch(error => {
+            alert('Error al eliminar la reserva');
+            console.error('Error al eliminar la reserva:', error);
+        });
+    }
 });
 
   
