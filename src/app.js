@@ -11,6 +11,7 @@ import gestionHorarios from './routes/gestionHorarios.routes.js';
 import gestionDisponibilidad from './routes/gestionDisponibilidad.routes.js';
 import gestionMenuRouter from './routes/gestionMenu.routes.js';
 import authenticationRoutes from "./routes/authentication.routes.js";
+import * as bodyParser from "express";
 
 // Necesario para __dirname en ESM
 const __filename = fileURLToPath(import.meta.url);
@@ -19,6 +20,7 @@ const __dirname = path.dirname(__filename);
 const app = express();
 const port = 3000;
 app.use(express.json());
+
 
 // Servir archivos estáticos desde public/
 app.use(express.static(path.join(__dirname, '../public')));

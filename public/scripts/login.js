@@ -17,7 +17,7 @@ $(document).ready(function() {
                 headers: {
                     'Content-Type': 'application/json',
                 },
-                credentials: 'include', // ESTO ES CLAVE
+                credentials: 'include',
                 body: JSON.stringify(formData)
             });
 
