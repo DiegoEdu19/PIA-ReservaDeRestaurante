@@ -77,25 +77,25 @@ $(document).ready(function () {
     }
 
     function cargarRestaurante() {
-        fetch('/api/restaurantes')
-            .then(response => {
-                if (!response.ok) {
-                    return response.text().then(text => { throw new Error(text) });
-                }
-                return response.json();
-            })
-            .then(estados => {
-                const $select = $('#restaurante');
-                $select.empty();
-                estados.forEach(estado => {
-                $select.append(`<option value="${restaurante.id_restaurante}">${restaurante.nombre}</option>`);
-                });
-            })
-            .catch(error => {
-                console.error('Error al cargar los estados de reserva:', error);
-                $('#estado').append('<option disabled>Error al cargar estados</option>');
+    fetch('/api/restaurantes')
+        .then(response => {
+            if (!response.ok) {
+                return response.text().then(text => { throw new Error(text) });
+            }
+            return response.json();
+        })
+        .then(restaurantes => {
+            const $select = $('#restaurante');
+            $select.empty();
+            restaurantes.forEach(restaurante => {
+                $select.append(`<option value="${restaurante.id}">${restaurante.nombre}</option>`);
             });
-    }
+        })
+        .catch(error => {
+            console.error('Error al cargar los restaurantes:', error);
+            $('#restaurante').append('<option disabled>Error al cargar restaurantes</option>');
+        });
+}
     // --- Evento para agregar nueva reserva ---
     $('#form-agregar-reserva').on('submit', function (e) {
         e.preventDefault();
@@ -107,7 +107,8 @@ $(document).ready(function () {
             hora: $('#hora').val(),
             hora_fin: $('#hora_fin').val(),
             telefono: $('#telefono').val(),
-            estado_id: $('#estado').val()
+            estado_id: $('#estado').val(),
+            id_restaurante: $('#restaurante').val()
         };
 
         fetch('/reservas', {
