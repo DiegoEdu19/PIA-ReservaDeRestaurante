@@ -31,7 +31,7 @@
         </ul>
     </div>
 
-    <div class="card-body m-auto">
+    <div class="card-body m-auto" id="form-agregar-reserva">
 
         <!-- Formulario principal -->
         <div id="formulario-principal">
@@ -55,10 +55,9 @@
         <div id="formulario-adicional" style="display: none;">
             <h5>Tus datos</h5>
             <input type="text" class="form-control mb-2" placeholder="Nombre" id="nombre">
-            <input type="email" class="form-control mb-2" placeholder="Correo electrónico" id="correo">
             <input type="tel" class="form-control mb-2" placeholder="Teléfono" id="telefono">
             <button type="button" class="btn btn-secondary" id="btn_volver">Volver</button>
-            <button type="submit" class="btn btn-danger">Enviar</button>
+            <button type="submit" class="btn btn-danger" id>Enviar</button>
         </div>
 
     </div>
@@ -138,6 +137,8 @@
     }
 </style>
 
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
 <script src="/scripts/creacionReserva.js"></script>
 
 </body>

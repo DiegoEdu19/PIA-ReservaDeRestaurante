@@ -1,14 +1,13 @@
-
-
-document.getElementById("btn_datos").addEventListener("click", function () {
-    document.getElementById("formulario-principal").style.display = "none";
-    document.getElementById("formulario-adicional").style.display = "block";
+$("#btn_datos").on("click", function () {
+    $("#formulario-principal").hide();
+    $("#formulario-adicional").show();
 });
 
-document.getElementById("btn_volver").addEventListener("click", function () {
-    document.getElementById("formulario-adicional").style.display = "none";
-    document.getElementById("formulario-principal").style.display = "block";
+$("#btn_volver").on("click", function () {
+    $("#formulario-adicional").hide();
+    $("#formulario-principal").show();
 });
+
 
 $('#form-agregar-reserva').on('submit', function (e) {
     e.preventDefault();
@@ -19,12 +18,12 @@ $('#form-agregar-reserva').on('submit', function (e) {
         fecha: $('#fecha').val(),
         hora_inicio: $('#hora').val(),
         telefono: $('#telefono').val(),
-        estado_id: 1,
+        id_estado: 1,
         id_restaurante: 1
     };
 
-    fetch(url, {
-        method: POST,
+    fetch("/crearReserva",{
+        method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(reservaData)
     })
