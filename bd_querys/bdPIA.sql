@@ -213,7 +213,7 @@ CREATE OR REPLACE FUNCTION registrar_cambio_estado_reserva()
 RETURNS TRIGGER AS $$
 BEGIN
     IF NEW.id_estado IS DISTINCT FROM OLD.id_estado THEN
-        INSERT INTO historial_reserva (id_reserva, estado_anterior, estado_nuevo)
+        INSERT INTO auditar_reserva (id_reserva, estado_anterior, estado_nuevo)
         VALUES (OLD.id_reserva, OLD.id_estado, NEW.id_estado);
     END IF;
     RETURN NEW;

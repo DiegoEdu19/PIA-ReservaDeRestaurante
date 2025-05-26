@@ -24,28 +24,8 @@ const login = async (req, res) => {
         const user = userResult.rows[0];
         const storedPassword = user.contrasena;
 
-        let isPasswordValid = false;
-
-        // Comprobar si la contraseña almacenada está en texto plano
-        const isPlainText = storedPassword === contrasena;
-
-        if (isPlainText) {
-            console.log("⚠️ Contraseña en texto plano detectada. Hasheando y actualizando...");
-
-            // Hashear contraseña
-            const hashedPassword = await bcrypt.hash(contrasena, 10);
-
-            // Actualizar contraseña en la base de datos
-            await pool.query(
-                'UPDATE "empleado" SET contrasena = $1 WHERE correo = $2',
-                [hashedPassword, correo]
-            );
-
-            isPasswordValid = true; // Ya validamos que coinciden
-        } else {
-            // Verificar si la contraseña hasheada es válida
-            isPasswordValid = await bcrypt.compare(contrasena, storedPassword);
-        }
+        // Verificar si la contraseña hasheada es válida
+        let isPasswordValid = await bcrypt.compare(contrasena, storedPassword);
 
         if (!isPasswordValid) {
             return res.status(400).json({ error: "Contraseña incorrecta" });
