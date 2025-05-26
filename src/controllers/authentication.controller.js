@@ -29,17 +29,17 @@ const login = async (req, res) => {
         // Comprobar si la contraseña almacenada está en texto plano
         const isPlainText = storedPassword === contrasena;
 
-        if (isPlainText) {
-            console.log("⚠️ Contraseña en texto plano detectada. Hasheando y actualizando...");
+            if (isPlainText) {
+                console.log("⚠️ Contraseña en texto plano detectada. Hasheando y actualizando...");
 
-            // Hashear contraseña
-            const hashedPassword = await bcrypt.hash(contrasena, 10);
+                // Hashear contraseña
+                const hashedPassword = await bcrypt.hash(contrasena, 10);
 
-            // Actualizar contraseña en la base de datos
-            await pool.query(
-                'UPDATE "empleado" SET contrasena = $1 WHERE correo = $2',
-                [hashedPassword, correo]
-            );
+                // Actualizar contraseña en la base de datos
+                await pool.query(
+                    'UPDATE "empleado" SET contrasena = $1 WHERE correo = $2',
+                    [hashedPassword, correo]
+                );
 
             isPasswordValid = true; // Ya validamos que coinciden
         } else {
