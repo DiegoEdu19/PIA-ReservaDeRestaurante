@@ -15,7 +15,7 @@ DECLARE
     fila RECORD;
     nuevo_correo VARCHAR;
 BEGIN
-    DELETE FROM correos_corregidos;
+    TRUNCATE TABLE correos_corregidos;
 
     OPEN cur_empleado;
 
@@ -64,7 +64,7 @@ DECLARE
     clasificacion TEXT;
 BEGIN
     -- Limpiar la tabla auxiliar antes de llenarla
-    DELETE FROM demanda_restaurante;
+    TRUNCATE TABLE demanda_restaurante;
 
     -- Abrimos el cursor
     OPEN restaurante_cursor;
@@ -120,7 +120,7 @@ DECLARE
     r RECORD;
     tipo TEXT;
 BEGIN
-    DELETE FROM resumen_reservas;
+    TRUNCATE TABLE resumen_reservas;
 
     OPEN cur_reserva;
 
