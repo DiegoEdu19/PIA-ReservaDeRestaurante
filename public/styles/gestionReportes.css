@@ -1,0 +1,12 @@
+body {
+    background-color: #f8f9fa;
+}
+
+.card {
+    border-radius: 1rem;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+}
+
+.table-wrapper {
+    overflow-x: auto;
+}
