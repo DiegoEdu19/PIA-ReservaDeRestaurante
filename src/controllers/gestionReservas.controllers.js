@@ -13,9 +13,11 @@ export const obtenerReservas = async (req, res) => {
         r.hora_fin,
         r.telefono,
         r.ocasion,            
-        er.descripcion AS estado_nombre 
+        er.descripcion AS estado_nombre,
+        rest.nombre AS restaurante_nombre
       FROM reserva r
       JOIN estado_reserva er ON r.id_estado = er.id_estado
+      JOIN restaurante rest ON r.id_restaurante = rest.id_restaurante
       ORDER BY r.fecha, r.hora_inicio
     `);
     res.json(result.rows);
