@@ -8,12 +8,12 @@ function cargarEmpleados() {
       data.forEach(empleado => {
         const fila = `
           <tr>
-            <td>${empleado.nombre_completo}</td>
+            <td>${empleado.id_empleado}</td>
             <td>${empleado.nombre} ${empleado.apellidos}</td>
             <td>${empleado.correo}</td>
             <td>${empleado.telefono}</td>
             <td>${empleado.contrasena}</td>
-            <td>${empleado.descripcion}</td>
+            <td>${empleado.nombre_rol || empleado.id_rol}</td>
             <td>${empleado.id_restaurante}</td>
             <td>
               <button class="btn btn-sm btn-primary editarEmpleado" data-id="${empleado.id_empleado}"><i class="bi bi-pencil"></i></button>
