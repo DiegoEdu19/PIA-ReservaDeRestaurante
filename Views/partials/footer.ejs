@@ -1,21 +1,20 @@
-<footer class="site-footer  bg-dark  text-white">
+<footer class="site-footer bg-dark text-white">
     <div class="footer-content">
         <div class="copyright">
             &copy; 2025 / Todos los derechos reservados / Big Fish<br>
-            <a href="/login">Administradores y empleados</a>
+            <a href="/login" class="text-white">Administradores y empleados</a>
         </div>
 
         <div class="social-media">
             <p>¡Síguenos en nuestras redes sociales!</p>
             <div class="social-icons">
                 <a href="https://www.facebook.com/bigfisshh" target="_blank" aria-label="Facebook">
-                    <i class="fa-brands fa-facebook fa-lg"></i>
+                    <i class="fab fa-facebook fa-lg"></i>
                 </a>
-                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+                &nbsp;&nbsp;&nbsp;
                 <a href="https://www.instagram.com/bigfishmx_/" target="_blank" aria-label="Instagram">
-                    <i class="fa-brands fa-instagram fa-lg"></i>
+                    <i class="fab fa-instagram fa-lg"></i>
                 </a>
-                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
             </div>
         </div>
     </div>
@@ -23,11 +22,11 @@
 
 <style>
     .site-footer {
-        background-color: #f8f8f8;
+        background-color: #212529;
         padding: 20px 0;
         font-family: Arial, sans-serif;
-        color: #333;
-        border-top: 1px solid #e7e7e7;
+        color: white;
+        border-top: 1px solid #444;
     }
 
     .footer-content {
@@ -37,14 +36,23 @@
         justify-content: space-between;
         align-items: center;
         padding: 0 20px;
+        flex-wrap: wrap;
     }
 
-    .copyright {
-        line-height: 1.5;
+    .footer-content a {
+        color: white;
+        text-decoration: none;
     }
 
-    .social-media p {
-        margin-bottom: 10px;
+    .footer-content a:hover {
+        text-decoration: underline;
+    }
+
+    .social-media {
         text-align: right;
+    }
+
+    .social-icons i {
+        margin: 0 8px;
     }
 </style>
