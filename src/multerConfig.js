@@ -1,6 +1,7 @@
 import multer from 'multer';
 import path from 'path';
-import {fileURLToPath} from "url";
+import fs from "fs";
+import { fileURLToPath } from "url";
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -10,7 +11,7 @@ const storage = multer.diskStorage({
         cb(null, path.join(__dirname, '../public/assets'));
     },
     filename: (req, file, cb) => {
-        cb(null, "menu" + path.extname(file.originalname))
+        cb(null, "menu.pdf"); // sobrescribe siempre como menu.pdf
     }
 });
 
@@ -25,6 +26,5 @@ const fileFilter = (req, file, cb) => {
 export const menuUpload = multer({
     storage,
     fileFilter,
-    limits: { fileSize: 5 * 1024 * 1024 } // 5MB
+    limits: { fileSize: 15 * 1024 * 1024 } // 5MB
 }).single('menu');
-
