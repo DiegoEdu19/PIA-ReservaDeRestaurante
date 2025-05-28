@@ -1,29 +1,34 @@
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
     <meta charset="utf-8">
     <title>Inicio</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.5/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-SgOJa3DmI69IUzQ2PVdRZhwQ+dy64/BUtbMJw1MZ8t5HZApcHrRKUc4W0kG879m7" crossorigin="anonymous">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.5/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-SgOJa3DmI69IUzQ2PVdRZhwQ+dy64/BUtbMJw1MZ8t5HZApcHrRKUc4W0kG879m7" crossorigin="anonymous">
     <link rel="stylesheet" href="/styles/footer.css">
     <link rel="stylesheet" href="/styles/index.css">
     <link rel="stylesheet" href="/styles/menu.css">
 
-<link rel="stylesheet"
+    <link rel="stylesheet"
         href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.6.0/css/fontawesome.min.css">
 </head>
 
 <body>
 
-<%- include('../partials/navbar') %>
+    <%- include('../partials/navbar') %>
 
-<div class="text-center">
-    <button type="button" class="btn btn-dark mt-2 mb-2" href="/assets/menu.pdf">Descarga aquí el menú</button>
-</div>
+        <div class="text-center">
+            <a href="/assets/menu.pdf" class="btn btn-dark mt-2 mb-2" download>
+                Descarga aquí el menú
+            </a>
+        </div>
 
-<div class="container text-center">
-<embed src="/assets/menu.pdf#zoom=FitH#zoom=FitH" type="application/pdf" width="60%" height="600px"/>
-</div>
-<%- include('../partials/footer') %>
+        <div class="container text-center">
+            <embed src="/assets/menu.pdf#zoom=FitH#zoom=FitH" type="application/pdf" width="60%" height="600px" />
+        </div>
+        <%- include('../partials/footer') %>
 
 </body>
+
 </html>
